@@ -1,0 +1,627 @@
+{
+    "users": [
+        {
+            "email": "juan.garcia@gmail.com",
+            "password": "vincla123",
+            "data": {
+                "name" : "Juan Garcia",
+                "timeZone" : "Europe/Madrid",
+                "verificationCode" : "123456"
+            },
+            "settings" : {
+                "notificationFreq" : "Semanal",
+                "notificationType" : "Cumpleanos",
+                "silentMode" : true
+            }
+        }
+    ],
+    "monthSummary": [
+        {
+            "icon": "/img/red_hourglass.svg",
+            "content": "No interactuaste con 2 vínculos íntimos",
+            "canBeMarked": false
+        },
+        {
+            "icon": "/img/red_heart.svg",
+            "content": "Tuviste 4 gestos afectivos",
+            "canBeMarked": false
+        },
+        {
+            "icon": "/img/red_vitals.svg",
+            "content": "Hubo 1 conflicto y 1 reconciliación",
+            "canBeMarked": false
+        },
+        {
+            "icon": "/img/red_trophy.svg",
+            "content": "Plan sin pantallas con alguien cercano",
+            "canBeMarked": true
+        },
+        {
+            "icon": "/img/red_trophy.svg",
+            "content": "Da las gracias sin motivo a alguien que siempre está",
+            "canBeMarked": true
+        }
+    ],
+    "reminders": {
+        "todayReminders": [
+            {
+                "icon": "/img/present.svg",
+                "content": "Hoy es el cumpleaños de Sofía Martínez"
+            }
+        ],
+        "lastContactReminders": [
+            {
+                "icon": "/img/clock2.svg",
+                "content": "Hace 3 semanas que no quedas con Carla Ruiz"
+            },
+            {
+                "icon": "/img/clock2.svg",
+                "content": "Han pasado 45 días desde tu llamada con Lucas García"
+            }
+        ],
+        "conflictReminders": [
+            {
+                "icon": "/img/red-thumb-down.svg",
+                "content": "Tu conflicto con Emma Ruiz está pendiente de resolver"
+            },
+            {
+                "icon": "/img/red-thumb-down.svg",
+                "content": "Tu conflicto con Juan García está pendiente de resolver"
+            }
+        ],
+        "pendingReminders": [
+            {
+                "icon": "/img/thunder.svg",
+                "content": "Tienes pendiente de quedar con Pablo el Lunes que viene"
+            }
+        ]
+    },
+    "bonds": [
+        {
+            "id": "0",
+            "name": "Mamá",
+            "image": "1.jpg",
+            "type": "familia",
+            "status": "estable",
+            "last_contact": "2025-07-03",
+            "closeness": "íntimo",
+            "birthday": "1968-07-12",
+            "data": {
+                "notes": "“Le debo una llamada, discutimos por...”",
+                "nextMeetingDate": "2025-07-26",
+                "dynamics": [
+                    {
+                        "date": "2023-10-11",
+                        "type": "Gesto afectivo",
+                        "title": "Preparar la merienda",
+                        "description": "Le preparo la merienda a mamá como forma de mostrarme cariñoso"
+                    },
+                    {
+                        "date": "2023-10-11",
+                        "type": "Compromiso",
+                        "title": "Reunión familiar cada sábado",
+                        "description": "Dado que no tendemos a hablar de nuestras cosas, mamá y yo decidimos reunirnos cada sábado para tener una charla sobre la semana. Le preparo la merienda a mamá como forma de mostrarme cariñoso"
+                    }
+                ],
+                "limits": [
+                    {
+                        "description": "No aceptar gritos",
+                        "enabled": true
+                    },
+                    {
+                        "description": "No tolerar insultos ni burlas",
+                        "enabled": true
+                    },
+                    {
+                        "description": "No permitir interrupciones constantes",
+                        "enabled": true
+                    },
+                    {
+                        "description": "No hacer chantaje emocional",
+                        "enabled": true
+                    },
+                    {
+                        "description": "No continuar discusiones cuando pido una pausa",
+                        "enabled": true
+                    },
+                    {
+                        "description": "No contactar fuera de horas razonables",
+                        "enabled": false
+                    }
+                ],
+                "conflicts": [
+                    {
+                        "date": "2023-10-22",
+                        "title": "Discusión por perder llaves del coche de mamá",
+                        "description": "Estaba de fiesta y perdí las llaves, me di cuenta de que no podía subir al coche y tuve que llamar a mi tío para que viniera a buscarme, mi madre se enfadó mucho.",
+                        "solution": "Pagaré yo de mi paga las nuevas llaves para el coche y seré más responsable con las cosas.",
+                        "isSolved" : true
+                    },
+                    {
+                        "date": "2023-10-22",
+                        "title": "Discusión por perder llaves del coche de mamá",
+                        "description": "Estaba de fiesta y perdí las llaves, me di cuenta de que no podía subir al coche y tuve que llamar a mi tío para que viniera a buscarme, mi madre se enfadó mucho.",
+                        "solution": "Pagaré yo de mi paga las nuevas llaves para el coche y seré más responsable con las cosas.",
+                        "isSolved" : true
+                    }
+                ],
+                "challenges": {
+                    "active": [
+                        {
+                            "title": "Decirle algo bonito sin motivo",
+                            "action": "Enviar mensajes con palabras de agradecimiento",
+                            "date": "2025-08-26"
+                        },
+                        {
+                            "title": "Proponer un plan sin hablar del conflicto",
+                            "action": "Escribe: “¿Te apetece tomar algo esta semana?”",
+                            "date": "2025-08-27"
+                        }
+                    ],
+                    "suggestions": [
+                        {
+                            "title": "Proponer un plan sin hablar del conflicto",
+                            "action": "Escribe: “¿Te apetece tomar algo esta semana?”",
+                            "date": "Antes del 20 de julio"
+                        }
+                    ]
+                },
+                "history": [
+                    {
+                        "date": "2025-05-06",
+                        "activity": "Quedada",
+                        "satisfaction": "Contento",
+                        "description": "Comimos en su casa y hablamos de su trabajo",
+                        "tags": []
+                    },
+                    {
+                        "date": "2025-05-13",
+                        "activity": "Videollamada",
+                        "satisfaction": "Contento",
+                        "description": "Videollamada rápida para ponernos al día",
+                        "tags": [
+                            "Conversación pendiente"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "1",
+            "name": "Papá",
+            "image": "default.svg",
+            "type": "familia",
+            "status": "muy buena racha",
+            "last_contact": "2025-07-03",
+            "closeness": "muy cercano",
+            "birthday": "",
+            "data": {
+                "birthday": "",
+                "notes": "",
+                "nextMeetingDate": "",
+                "dynamics": [],
+                "limits": [],
+                "conflicts": [],
+                "challenges": {
+                    "active": [],
+                    "suggestions": []
+                },
+                "history": []
+            }
+        },
+        {
+            "id": "2",
+            "name": "Carlos Gómez",
+            "image": "default.svg",
+            "type": "trabajo",
+            "status": "pendiente de reconexión",
+            "last_contact": "45 días",
+            "closeness": "neutral",
+            "birthday": "",
+            "data": {
+                "birthday": "",
+                "notes": "",
+                "nextMeetingDate": "",
+                "dynamics": [],
+                "limits": [],
+                "conflicts": [],
+                "challenges": {
+                    "active": [],
+                    "suggestions": []
+                },
+                "history": []
+            }
+        },
+        {
+            "id": "3",
+            "name": "Lucía Pérez",
+            "image": "default.svg",
+            "type": "amistad",
+            "status": "en conflicto",
+            "last_contact": "2025-07-03",
+            "closeness": "distante",
+            "birthday": "",
+            "data": {
+                "birthday": "",
+                "notes": "",
+                "nextMeetingDate": "",
+                "dynamics": [],
+                "limits": [],
+                "conflicts": [],
+                "challenges": {
+                    "active": [],
+                    "suggestions": []
+                },
+                "history": []
+            }
+        },
+        {
+            "id": "4",
+            "name": "Quique",
+            "image": "default.svg",
+            "type": "familia",
+            "status": "frío",
+            "last_contact": "2025-07-03",
+            "closeness": "neutral",
+            "birthday": "",
+            "data": {
+                "birthday": "",
+                "notes": "",
+                "nextMeetingDate": "",
+                "dynamics": [],
+                "limits": [],
+                "conflicts": [],
+                "challenges": {
+                    "active": [],
+                    "suggestions": []
+                },
+                "history": []
+            }
+        },
+        {
+            "id": "5",
+            "name": "Ana Torres",
+            "image": "default.svg",
+            "type": "pareja",
+            "status": "estable",
+            "last_contact": "2025-07-03",
+            "closeness": "íntimo",
+            "birthday": "",
+            "data": {
+                "birthday": "",
+                "notes": "",
+                "nextMeetingDate": "",
+                "dynamics": [],
+                "limits": [],
+                "conflicts": [],
+                "challenges": {
+                    "active": [],
+                    "suggestions": []
+                },
+                "history": []
+            }
+        },
+        {
+            "id": "6",
+            "name": "Primo Juan",
+            "image": "default.svg",
+            "type": "familia",
+            "status": "reconectado",
+            "last_contact": "2025-07-03",
+            "closeness": "cercano",
+            "birthday": "",
+            "data": {
+                "birthday": "",
+                "notes": "",
+                "nextMeetingDate": "",
+                "dynamics": [],
+                "limits": [],
+                "conflicts": [],
+                "challenges": {
+                    "active": [],
+                    "suggestions": []
+                },
+                "history": []
+            }
+        },
+        {
+            "id": "7",
+            "name": "Sofía León",
+            "image": "default.svg",
+            "type": "amistad",
+            "status": "tensión reciente",
+            "last_contact": "2025-07-03",
+            "closeness": "muy cercano",
+            "birthday": "",
+            "data": {
+                "birthday": "",
+                "notes": "",
+                "nextMeetingDate": "",
+                "dynamics": [],
+                "limits": [],
+                "conflicts": [],
+                "challenges": {
+                    "active": [],
+                    "suggestions": []
+                },
+                "history": []
+            }
+        },
+        {
+            "id": "8",
+            "name": "Miguel Herrera",
+            "image": "default.svg",
+            "type": "conocido",
+            "status": "neutral",
+            "last_contact": "2025-07-03",
+            "closeness": "distante",
+            "birthday": "",
+            "data": {
+                "birthday": "",
+                "notes": "",
+                "nextMeetingDate": "",
+                "dynamics": [],
+                "limits": [],
+                "conflicts": [],
+                "challenges": {
+                    "active": [],
+                    "suggestions": []
+                },
+                "history": []
+            }
+        },
+        {
+            "id": "9",
+            "name": "Vecino Paco",
+            "image": "default.svg",
+            "type": "otro",
+            "status": "estable",
+            "last_contact": "2025-07-03",
+            "closeness": "neutral",
+            "birthday": "",
+            "data": {
+                "birthday": "",
+                "notes": "",
+                "nextMeetingDate": "",
+                "dynamics": [],
+                "limits": [],
+                "conflicts": [],
+                "challenges": {
+                    "active": [],
+                    "suggestions": []
+                },
+                "history": []
+            }
+        },
+        {
+            "id": "10",
+            "name": "Tía Marta",
+            "image": "default.svg",
+            "type": "familia",
+            "status": "estable",
+            "last_contact": "2025-07-03",
+            "closeness": "cercano",
+            "birthday": "",
+            "data": {
+                "birthday": "",
+                "notes": "",
+                "nextMeetingDate": "",
+                "dynamics": [],
+                "limits": [],
+                "conflicts": [],
+                "challenges": {
+                    "active": [],
+                    "suggestions": []
+                },
+                "history": []
+            }
+        },
+        {
+            "id": "11",
+            "name": "Pedro Sánchez",
+            "image": "default.svg",
+            "type": "trabajo",
+            "status": "tensión reciente",
+            "last_contact": "2025-07-03",
+            "closeness": "neutral",
+            "birthday": "",
+            "data": {
+                "birthday": "",
+                "notes": "",
+                "nextMeetingDate": "",
+                "dynamics": [],
+                "limits": [],
+                "conflicts": [],
+                "challenges": {
+                    "active": [],
+                    "suggestions": []
+                },
+                "history": []
+            }
+        },
+        {
+            "id": "12",
+            "name": "Raquel Díaz",
+            "image": "default.svg",
+            "type": "amistad",
+            "status": "muy buena racha",
+            "last_contact": "2025-07-03",
+            "closeness": "muy cercano",
+            "birthday": "",
+            "data": {
+                "birthday": "",
+                "notes": "",
+                "nextMeetingDate": "",
+                "dynamics": [],
+                "limits": [],
+                "conflicts": [],
+                "challenges": {
+                    "active": [],
+                    "suggestions": []
+                },
+                "history": []
+            }
+        },
+        {
+            "id": "13",
+            "name": "Sobrina Clara",
+            "image": "default.svg",
+            "type": "familia",
+            "status": "frío",
+            "last_contact": "2025-07-03",
+            "closeness": "distante",
+            "birthday": "",
+            "data": {
+                "birthday": "",
+                "notes": "",
+                "nextMeetingDate": "",
+                "dynamics": [],
+                "limits": [],
+                "conflicts": [],
+                "challenges": {
+                    "active": [],
+                    "suggestions": []
+                },
+                "history": []
+            }
+        },
+        {
+            "id": "14",
+            "name": "Ex pareja Laura",
+            "image": "default.svg",
+            "type": "pareja",
+            "status": "en conflicto",
+            "last_contact": "2025-07-03",
+            "closeness": "distante",
+            "birthday": "",
+            "data": {
+                "birthday": "",
+                "notes": "",
+                "nextMeetingDate": "",
+                "dynamics": [],
+                "limits": [],
+                "conflicts": [],
+                "challenges": {
+                    "active": [],
+                    "suggestions": []
+                },
+                "history": []
+            }
+        },
+        {
+            "id": "15",
+            "name": "Raúl Fernandez",
+            "image": "default.svg",
+            "type": "amistad",
+            "status": "reconectado",
+            "last_contact": "2025-07-03",
+            "closeness": "cercano",
+            "birthday": "",
+            "data": {
+                "birthday": "",
+                "notes": "",
+                "nextMeetingDate": "",
+                "dynamics": [],
+                "limits": [],
+                "conflicts": [],
+                "challenges": {
+                    "active": [],
+                    "suggestions": []
+                },
+                "history": []
+            }
+        },
+        {
+            "id": "16",
+            "name": "Jefa Marta Ruiz",
+            "image": "default.svg",
+            "type": "trabajo",
+            "status": "estable",
+            "last_contact": "2025-07-03",
+            "closeness": "neutral",
+            "birthday": "",
+            "data": {
+                "birthday": "",
+                "notes": "",
+                "nextMeetingDate": "",
+                "dynamics": [],
+                "limits": [],
+                "conflicts": [],
+                "challenges": {
+                    "active": [],
+                    "suggestions": []
+                },
+                "history": []
+            }
+        },
+        {
+            "id": "17",
+            "name": "Andrea Romero",
+            "image": "default.svg",
+            "type": "conocido",
+            "status": "frío",
+            "last_contact": "2025-07-03",
+            "closeness": "distante",
+            "birthday": "",
+            "data": {
+                "birthday": "",
+                "notes": "",
+                "nextMeetingDate": "",
+                "dynamics": [],
+                "limits": [],
+                "conflicts": [],
+                "challenges": {
+                    "active": [],
+                    "suggestions": []
+                },
+                "history": []
+            }
+        },
+        {
+            "id": "18",
+            "name": "Hermana",
+            "image": "default.svg",
+            "type": "familia",
+            "status": "muy buena racha",
+            "last_contact": "2025-07-03",
+            "closeness": "íntimo",
+            "birthday": "",
+            "data": {
+                "birthday": "",
+                "notes": "",
+                "nextMeetingDate": "",
+                "dynamics": [],
+                "limits": [],
+                "conflicts": [],
+                "challenges": {
+                    "active": [],
+                    "suggestions": []
+                },
+                "history": []
+            }
+        },
+        {
+            "id": "19",
+            "name": "Vecina Paula",
+            "image": "default.svg",
+            "type": "otro",
+            "status": "estable",
+            "last_contact": "2025-07-03",
+            "closeness": "neutral",
+            "birthday": "",
+            "data": {
+                "birthday": "",
+                "notes": "",
+                "nextMeetingDate": "",
+                "dynamics": [],
+                "limits": [],
+                "conflicts": [],
+                "challenges": {
+                    "active": [],
+                    "suggestions": []
+                },
+                "history": []
+            }
+        }
+    ]
+}
