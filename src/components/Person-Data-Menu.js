@@ -22,6 +22,13 @@ export const PersonDataMenu = ({ bonds, index }) => {
     const [selectedTab, setSelectedTab] = useState("dinamicas");
     const [mobileWindowTab, setMobileWindowTab] = useState("");
     const [editWindowVisible, setEditWindoVisible] = useState(false);
+    const [newBondValue, setNewBondValue] = useState(false);
+
+    if (localStorage.getItem("newBond")) {
+        localStorage.removeItem("newBond");
+        setEditWindoVisible(true);
+        setNewBondValue(true);
+    }
 
     const toggleEditWindowVisible = () => {
         setEditWindoVisible(prev => !prev);
@@ -48,7 +55,7 @@ export const PersonDataMenu = ({ bonds, index }) => {
     /* Check how many days since last contact */
 
     function daysAgo(dateString) {
-        if (dateString == "") return " ";
+        if (dateString === "") return " ";
 
         const inputDate = new Date(dateString);
         const today = new Date();
@@ -69,7 +76,7 @@ export const PersonDataMenu = ({ bonds, index }) => {
 
     return (
         <div className="personDataMenu">
-            {editWindowVisible && <EditWindow person={person} newPerson="" toggleEditWindowVisible={toggleEditWindowVisible}></EditWindow>}
+            {editWindowVisible && <EditWindow person={person} newPerson="" toggleEditWindowVisible={toggleEditWindowVisible} newBond={newBondValue}></EditWindow>}
             <div className="personDataSide contentWrap">
                 <div className='personDataTop infoSection'>
                     <div className="personPhotoAndName">
@@ -141,11 +148,11 @@ export const PersonDataMenu = ({ bonds, index }) => {
                 <button type="button" className={"expandBtn" + (sideMenuVisible ? " expandBtnOpen" : "")} onClick={toggleSideMenuVisible}></button>
                 <nav className="personTabs">
                     <ul>
-                        <li><button type="button" onClick={() => setSelectedTab("dinamicas")} className={selectedTab == "dinamicas" ? "active" : ""}>Dinámicas</button></li>
-                        <li><button type="button" onClick={() => setSelectedTab("limites")} className={selectedTab == "limites" ? "active" : ""}>Límites</button></li>
-                        <li><button type="button" onClick={() => setSelectedTab("conflictos")} className={selectedTab == "conflictos" ? "active" : ""}>Conflictos</button></li>
-                        <li><button type="button" onClick={() => setSelectedTab("desafios")} className={selectedTab == "desafios" ? "active" : ""}>Desafíos</button></li>
-                        <li><button type="button" onClick={() => setSelectedTab("historial")} className={selectedTab == "historial" ? "active" : ""}>Historial</button></li>
+                        <li><button type="button" onClick={() => setSelectedTab("dinamicas")} className={selectedTab === "dinamicas" ? "active" : ""}>Dinámicas</button></li>
+                        <li><button type="button" onClick={() => setSelectedTab("limites")} className={selectedTab === "limites" ? "active" : ""}>Límites</button></li>
+                        <li><button type="button" onClick={() => setSelectedTab("conflictos")} className={selectedTab === "conflictos" ? "active" : ""}>Conflictos</button></li>
+                        <li><button type="button" onClick={() => setSelectedTab("desafios")} className={selectedTab === "desafios" ? "active" : ""}>Desafíos</button></li>
+                        <li><button type="button" onClick={() => setSelectedTab("historial")} className={selectedTab === "historial" ? "active" : ""}>Historial</button></li>
                     </ul>
                 </nav>
 
@@ -174,11 +181,11 @@ export const PersonDataMenu = ({ bonds, index }) => {
                     <div className={"mobileWindow" + (mobileWindowTab != "" ? " mobileWindowOpen" : "")}>
                         <h2 className="mobileWindowHeader">{mobileWindowTab}</h2>
                         <div>
-                            {(selectedTab == "dinamicas") && <DynamicsPage person={person} />}
-                            {(selectedTab == "limites") && <LimitsPage person={person} />}
-                            {(selectedTab == "conflictos") && <ConflictPage person={person} />}
-                            {(selectedTab == "desafios") && <ChallengesPage person={person} />}
-                            {(selectedTab == "historial") && <HistoryPage person={person} />}
+                            {(selectedTab === "dinamicas") && <DynamicsPage person={person} />}
+                            {(selectedTab === "limites") && <LimitsPage person={person} />}
+                            {(selectedTab === "conflictos") && <ConflictPage person={person} />}
+                            {(selectedTab === "desafios") && <ChallengesPage person={person} />}
+                            {(selectedTab === "historial") && <HistoryPage person={person} />}
                         </div>
                         <div className="formSubmitSection hideOnBigScreen">
                             <button type="button" onClick={() => setMobileWindowTab("")}>Volver</button>

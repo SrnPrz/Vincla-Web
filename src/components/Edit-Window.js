@@ -5,11 +5,9 @@ import { LimitsPage } from "./Limits-Page";
 import { ChallengesPage } from "./Challenges-Page";
 import { HistoryPage } from "./History-Page";
 import Slider from '@mui/material/Slider';
-import { useNavigate } from "react-router-dom";
 
-const HistoryEdit = ({ person, setMobileWindowOpen }) => {
+const HistoryEdit = ({ person, setMobileWindowOpen, newBond }) => {
     const [windowsOpen, setWindowsOpen] = useState(false);
-
     const [satisfactionValue, setSatisfactionValue] = useState(0);
 
     const handleSliderChange = (event, newValue) => {
@@ -37,7 +35,7 @@ const HistoryEdit = ({ person, setMobileWindowOpen }) => {
 
     return (
         <div className="historyPage">
-            <h1 className="hideOnBigScreen">Editar Vínculo</h1>
+            <h1 className="hideOnBigScreen">{ newBond ? "Nuevo Vínculo" : "Editar Vínculo"}</h1>
             {
                 !windowsOpen &&
                 <div>
@@ -168,7 +166,7 @@ const HistoryEdit = ({ person, setMobileWindowOpen }) => {
     )
 }
 
-const ChallengesEdit = ({ person, setMobileWindowOpen }) => {
+const ChallengesEdit = ({ person, setMobileWindowOpen, newBond }) => {
     const [windowsOpen, setWindowsOpen] = useState(false);
 
     const [challengeName, setChallengeName] = useState("");
@@ -177,7 +175,7 @@ const ChallengesEdit = ({ person, setMobileWindowOpen }) => {
 
     return (
         <div className="conflictPage">
-            <h1 className="hideOnBigScreen">Editar Vínculo</h1>
+            <h1 className="hideOnBigScreen">{ newBond ? "Nuevo Vínculo" : "Editar Vínculo"}</h1>
             {
                 !windowsOpen &&
                 <div>
@@ -229,7 +227,7 @@ const ChallengesEdit = ({ person, setMobileWindowOpen }) => {
     )
 }
 
-const ConflictEdit = ({ person, setMobileWindowOpen }) => {
+const ConflictEdit = ({ person, setMobileWindowOpen, newBond }) => {
     const [windowsOpen, setWindowsOpen] = useState(false);
 
     const toggleWindowsOpen = () => {
@@ -244,7 +242,7 @@ const ConflictEdit = ({ person, setMobileWindowOpen }) => {
 
     return (
         <div className="conflictPage">
-            <h1 className="hideOnBigScreen">Editar Vínculo</h1>
+            <h1 className="hideOnBigScreen">{ newBond ? "Nuevo Vínculo" : "Editar Vínculo"}</h1>
             {
                 !windowsOpen &&
                 <div>
@@ -313,7 +311,7 @@ const ConflictEdit = ({ person, setMobileWindowOpen }) => {
     )
 }
 
-const LimitsEdit = ({ person, setMobileWindowOpen }) => {
+const LimitsEdit = ({ person, setMobileWindowOpen, newBond }) => {
     const [windowsOpen, setWindowsOpen] = useState(false);
 
     const toggleWindowsOpen = () => {
@@ -336,7 +334,7 @@ const LimitsEdit = ({ person, setMobileWindowOpen }) => {
 
     return (
         <div className="limitsPage">
-            <h1 className="hideOnBigScreen">Editar Vínculo</h1>
+            <h1 className="hideOnBigScreen">{ newBond ? "Nuevo Vínculo" : "Editar Vínculo"}</h1>
             {
                 !windowsOpen &&
                 <div>
@@ -406,7 +404,7 @@ const LimitsEdit = ({ person, setMobileWindowOpen }) => {
     )
 }
 
-const DynamicsEdit = ({ person, setMobileWindowOpen }) => {
+const DynamicsEdit = ({ person, setMobileWindowOpen, newBond }) => {
     const [windowsOpen, setWindowsOpen] = useState(false);
 
     const toggleWindowsOpen = () => {
@@ -420,7 +418,7 @@ const DynamicsEdit = ({ person, setMobileWindowOpen }) => {
 
     return (
         <div className="dynamicsPage">
-            <h1 className="hideOnBigScreen">Editar Vínculo</h1>
+            <h1 className="hideOnBigScreen">{ newBond ? "Nuevo Vínculo" : "Editar Vínculo"}</h1>
             {
                 !windowsOpen &&
                 <div>
@@ -487,10 +485,10 @@ const DynamicsEdit = ({ person, setMobileWindowOpen }) => {
     )
 }
 
-const FileEdit = ({ person, setMobileWindowOpen }) => {
+const FileEdit = ({ person, setMobileWindowOpen, newBond }) => {
     return (
         <div className="fileEditPage">
-            <h1 className="hideOnBigScreen">Editar Vínculo</h1>
+            <h1 className="hideOnBigScreen">{ newBond ? "Nuevo Vínculo" : "Editar Vínculo"}</h1>
             <div className="editPageHeading">
                 <h2>Ficha</h2>
             </div>
@@ -539,7 +537,8 @@ const FileEdit = ({ person, setMobileWindowOpen }) => {
                 </div>
                 <div className="formSection">
                     <label htmlFor="bwBirthday">Cumpleaños</label>
-                    <input type="date" id="bwBirthday" defaultValue={person.birthday}></input>
+                    <input onChange={(e) => {person.birthday = e.target.value}}
+                    type="date" id="bwBirthday" defaultValue={person.birthday}></input>
                 </div>
                 <div className="formSubmitSection">
                     <button className="hideOnBigScreen" type="button" onClick={() => setMobileWindowOpen(false)}>Atrás</button>
@@ -549,7 +548,7 @@ const FileEdit = ({ person, setMobileWindowOpen }) => {
     )
 }
 
-export const EditWindow = ({ person, toggleEditWindowVisible }) => {
+export const EditWindow = ({ person, toggleEditWindowVisible, newBond }) => {
     const [selectedTab, setSelectedTab] = useState("ficha");
 
     const changeSelectedTab = (newTab) => {
@@ -564,7 +563,7 @@ export const EditWindow = ({ person, toggleEditWindowVisible }) => {
                 <button onClick={toggleEditWindowVisible} className="editWindowCloseBtn" type="button">
                     <img width="20px" height="20px" src="/img/close.svg"></img>
                 </button>
-                <h1 className="editWindowHeading hide">Editar Vínculo</h1>
+                <h1 className="editWindowHeading hide">{ newBond ? "Nuevo Vínculo" : "Editar Vínculo"}</h1>
                 <div className="editWindowBody">
                     <nav className="editWindowNav">
                         <ul>
@@ -616,12 +615,18 @@ export const EditWindow = ({ person, toggleEditWindowVisible }) => {
                                     className="personDataAccordionBtn">Historial</button>
                                 </div>
                                 <div className={"mobileWindow" + (mobileWindowOpen != "" ? " mobileWindowOpen" : "")}>
-                                    {(selectedTab == "ficha") && <FileEdit setMobileWindowOpen={setMobileWindowOpen} person={person}></FileEdit>}
-                                    {(selectedTab == "dinamicas") && <DynamicsEdit setMobileWindowOpen={setMobileWindowOpen} person={person}></DynamicsEdit>}
-                                    {(selectedTab == "limites") && <LimitsEdit setMobileWindowOpen={setMobileWindowOpen} person={person}></LimitsEdit>}
-                                    {(selectedTab == "conflictos") && <ConflictEdit setMobileWindowOpen={setMobileWindowOpen} person={person}></ConflictEdit>}
-                                    {(selectedTab == "desafios") && <ChallengesEdit setMobileWindowOpen={setMobileWindowOpen} person={person}></ChallengesEdit>}
-                                    {(selectedTab == "historial") && <HistoryEdit setMobileWindowOpen={setMobileWindowOpen} person={person}></HistoryEdit>}
+                                    {(selectedTab == "ficha") && <FileEdit setMobileWindowOpen={setMobileWindowOpen} 
+                                    person={person} newBond={newBond}></FileEdit>}
+                                    {(selectedTab == "dinamicas") && <DynamicsEdit setMobileWindowOpen={setMobileWindowOpen} 
+                                    person={person} newBond={newBond}></DynamicsEdit>}
+                                    {(selectedTab == "limites") && <LimitsEdit setMobileWindowOpen={setMobileWindowOpen} 
+                                    person={person} newBond={newBond}></LimitsEdit>}
+                                    {(selectedTab == "conflictos") && <ConflictEdit setMobileWindowOpen={setMobileWindowOpen} 
+                                    person={person} newBond={newBond}></ConflictEdit>}
+                                    {(selectedTab == "desafios") && <ChallengesEdit setMobileWindowOpen={setMobileWindowOpen} 
+                                    person={person} newBond={newBond}></ChallengesEdit>}
+                                    {(selectedTab == "historial") && <HistoryEdit setMobileWindowOpen={setMobileWindowOpen} 
+                                    person={person} newBond={newBond}></HistoryEdit>}
                                 </div>
                             </div>
                         </div>

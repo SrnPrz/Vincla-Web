@@ -18,7 +18,9 @@ export const PersonCards = ({ data, toggleUpdateData, filter }) => {
 
         maxID++;
 
-        bonds.push(
+        var newData = {...data};
+
+        newData.bonds.push(
             {
             "id": maxID,
             "name": "",
@@ -43,9 +45,14 @@ export const PersonCards = ({ data, toggleUpdateData, filter }) => {
             }
         });
 
-        toggleUpdateData(data);
+        toggleUpdateData(newData);
+
+        localStorage.setItem("newBond", true);
+
         navigate("/vinculos/persona/" + maxID);
     }
+
+    //localStorage.removeItem("newBond");
 
     const [searchedName, setSearchedName] = useState("");
 
