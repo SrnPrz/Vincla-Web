@@ -8,7 +8,7 @@ import { ModifyProfileMenu } from './Modify-Profile-Menu';
 import { VerificationMenu } from './Verification-Menu';
 import { PasswordMenu } from './Password-Menu';
 import { NotificationMenu } from './Notification-Menu';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export const MainContent = ({data, menuVisible}) => {
 
@@ -20,10 +20,6 @@ export const MainContent = ({data, menuVisible}) => {
         data = newData;
         setUpdatedData(newData);
     } 
-
-    useEffect(() => {
-        document.title = 'Vincla - Cuida lo que te une';
-    }, []);
 
     return (
         <main id="mainContent">

@@ -2,6 +2,10 @@ import { useState } from "react";
 
 export const Login = ({data, person }) => {
 
+    useEffect(() => {
+        document.title = 'Vincla - Cuida lo que te une';
+    }, []);
+
     const [userLogginEnabled, enableUserLoggin] = useState(false);
     
     const toggleUserLoggin = () => {
