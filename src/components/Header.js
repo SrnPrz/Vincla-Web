@@ -16,7 +16,7 @@ export const Header = ({isLogged, setMenuVisible }) => {
                 <img src="/img/burger-menu.svg" width="36px" height="36px"></img>
             </button>}
             <div>
-                <a href="/vinculos">
+                <a>
                     <img src="/img/vincla_logo.svg"></img>
                 </a>
             </div>
