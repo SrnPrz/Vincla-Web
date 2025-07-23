@@ -36,8 +36,7 @@ export const PasswordMenu = ({user}) => {
                     <input id="oldPassword" onChange={(e) => { setOldPassword(e.target.value) }} 
                         type="password" placeholder="Introduzca su contraseña actual" required></input>
                 </div>
-                <p className="tip"><a>¿No recuerdas tu contraseña?</a></p>
-
+                
                 <div className="formSection">
                    <h2>Contraseña actual</h2>
                     <input id="newPassword" onChange={(e) => { setNewPassword(e.target.value) }} 

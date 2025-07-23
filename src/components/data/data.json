@@ -10,7 +10,9 @@
             },
             "settings" : {
                 "notificationFreq" : "Semanal",
-                "notificationType" : "Cumpleanos",
+                "notificationTypes" : {
+                    "birthday" : true
+                },
                 "silentMode" : true
             }
         }
@@ -100,7 +102,7 @@
                         "date": "2023-10-11",
                         "type": "Compromiso",
                         "title": "Reunión familiar cada sábado",
-                        "description": "Dado que no tendemos a hablar de nuestras cosas, mamá y yo decidimos reunirnos cada sábado para tener una charla sobre la semana. Le preparo la merienda a mamá como forma de mostrarme cariñoso"
+                        "description": "Dado que no tendemos a hablar de nuestras cosas, mamá y yo decidimos reunirnos cada sábado para tener una charla sobre la semana."
                     }
                 ],
                 "limits": [
@@ -352,7 +354,7 @@
             "name": "Miguel Herrera",
             "image": "default.svg",
             "type": "conocido",
-            "status": "neutral",
+            "status": "estable",
             "last_contact": "2025-07-03",
             "closeness": "distante",
             "birthday": "",

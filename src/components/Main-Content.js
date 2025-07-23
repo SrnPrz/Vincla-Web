@@ -32,7 +32,7 @@ export const MainContent = ({data, menuVisible}) => {
             </div>
             <div id="pageContent">
                 <Routes>
-                    <Route path="/" element={ <BondsMenu data={updatedData} toggleUpdateData={toggleUpdateData}></BondsMenu> }></Route>
+                    <Route path="/vinculos" element={ <BondsMenu data={updatedData} toggleUpdateData={toggleUpdateData}></BondsMenu> }></Route>
                     <Route path="/vinculos/*" element={ <BondsMenu data={updatedData} toggleUpdateData={toggleUpdateData}></BondsMenu> }></Route>
                     <Route path="/recordatorios" element={ <RemindersMenu data={updatedData}></RemindersMenu> }></Route>
                     <Route path="/estado-general" element={ <OverallConditionMenu data={updatedData}></OverallConditionMenu> }></Route>

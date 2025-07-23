@@ -55,6 +55,7 @@ export const PersonCards = ({ data, toggleUpdateData, filter }) => {
     //localStorage.removeItem("newBond");
 
     const [searchedName, setSearchedName] = useState("");
+    const [sortedBy, setSortedBy] = useState("cercania-emocional");
 
     const closenessValue = {
         "íntimo" : 4,
@@ -62,7 +63,26 @@ export const PersonCards = ({ data, toggleUpdateData, filter }) => {
         "cercano" : 2,
         "neutral" : 1,
         "distante" : 0
-    }
+    };
+
+    const typeValue = {
+        "familia" : 5,
+        "pareja" : 4,
+        "amistad" : 3,
+        "trabajo" : 2,
+        "conocido" : 1,
+        "otro" : 0
+    };
+
+    const statusValue = {
+        "estable" : 6,
+        "muy buena racha" : 5,
+        "tensión reciente" : 4,
+        "reconectando" : 3,
+        "pendiente de reconexión" : 2,
+        "frío" : 1,
+        "en conflicto" : 0,
+    };
 
     const filteredBonds = bonds
         .filter((person) =>
@@ -71,8 +91,10 @@ export const PersonCards = ({ data, toggleUpdateData, filter }) => {
         .filter((person) =>
             person.name.toLowerCase().includes(searchedName.toLowerCase())
         )
-        .sort((a, b) => 
-            closenessValue[b.closeness] - closenessValue[a.closeness]
+        .sort((a, b) =>
+            sortedBy === "cercania-emocional" ? closenessValue[b.closeness] - closenessValue[a.closeness] :
+            sortedBy === "tipo-vinculo" ? typeValue[b.type] - typeValue[a.type] :
+            statusValue[b.status] - statusValue[a.status]
         );
 
     function convertDateFormat(dateString) {
@@ -93,6 +115,9 @@ export const PersonCards = ({ data, toggleUpdateData, filter }) => {
         <div className="bondsMenu contentWrap">
             <h1>Mis Vínculos</h1>
             <div className="bondsOps">
+                <button className="hideOnDesktop" onClick={handleNewPerson}>
+                    <img src="/img/add-person.svg" width="20px" height="20px"></img>
+                </button>
                 <button className="filterButton hideOnDesktop">
                     <img src="/img/filter_icon.svg"></img>
                 </button>
@@ -113,8 +138,11 @@ export const PersonCards = ({ data, toggleUpdateData, filter }) => {
                 <button className="hideOnPhone" onClick={handleNewPerson}>+ Añadir vínculo</button>
                 <label className="hideOnPhone" htmlFor="filterBond">Ordenar por:</label>
                 <div className="filterSelect">
-                    <select id="filterBond" className="filterSelectInput">
+                    <select id="filterBond" className="filterSelectInput" defaultValue={sortedBy}
+                    onChange={(e) => setSortedBy(e.target.value)}>
                         <option value="cercania-emocional">Cercanía emocional</option>
+                        <option value="tipo-vinculo">Tipo de vínculo</option>
+                        <option value="estado-relacion">Estado de la relación</option>
                     </select>
                 </div>
             </div>
