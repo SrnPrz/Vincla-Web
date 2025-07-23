@@ -32,20 +32,19 @@ export const PasswordMenu = ({user}) => {
                 }
             }>
                 <div className="formSection">
-                    <label htmlFor="oldPassword">Contraseña actual</label>
+                    <h2>Contraseña actual</h2>
                     <input id="oldPassword" onChange={(e) => { setOldPassword(e.target.value) }} 
                         type="password" placeholder="Introduzca su contraseña actual" required></input>
                 </div>
-                <p className="tip"><a>¿No recuerdas tu contraseña?</a></p>
-
+                
                 <div className="formSection">
-                    <label htmlFor="newPassword">Contraseña actual</label>
+                   <h2>Contraseña actual</h2>
                     <input id="newPassword" onChange={(e) => { setNewPassword(e.target.value) }} 
                         type="password" placeholder="Nueva contraseña (6-60 caracteres)" required></input>
                 </div>
 
                 <div className="formSection">
-                    <label htmlFor="oldPassword">Repetir contraseña</label>
+                    <h2>Repetir contraseña</h2>
                     <input id="oldPassword" onChange={(e) => { setRepeatPassword(e.target.value) }} 
                         type="password" placeholder="Vuelve a escribir tu nueva contraseña" required></input>
                 </div>

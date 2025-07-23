@@ -347,6 +347,7 @@ input[type="checkbox"] {
   flex-basis: 16px;
   min-width: 0;
   height: 12px;
+  transform: scale(1.5);
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -423,7 +424,7 @@ header > div {
   border: 0;
 }
 
-.notification-btn::before {
+.notification-btn-new-notif::before {
   content: "";
   background-color: #EAA4A4;
   width: 14px;
@@ -453,6 +454,20 @@ header > div {
   border: 1px solid var(--secondary-color);
   border-radius: 5px;
   padding: 12px;
+  background-color: var(--base-1);
+}
+
+.formTagsInput {
+  display: flex;
+  column-gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+input.tagInput {
+  max-width: 120px;
+  padding: 12px;
+  display: inline-block;
 }
 
 /* Notifications */
@@ -484,6 +499,10 @@ header > div {
   padding: 12px 0 32px 32px;
 }
 
+.sideSubMenuNav > ul > li {
+  margin-bottom: 6px;
+}
+
 .active + .sideSubMenuNav {
   display: inherit;
 }
@@ -513,6 +532,11 @@ header > div {
 
 .subMenuDropdownIcon {
   margin-left: 32px;
+  transform: rotate(180deg);
+}
+
+.active > .subMenuDropdownIcon {
+  transform: rotate(0);
 }
 
 .sideMenuSub > ul > li {
@@ -550,6 +574,10 @@ header > div {
   position: relative;
   width: 20%;
   min-width: 200px;
+}
+
+.searchBtn {
+  opacity: 0.4;
 }
 
 input.searchBarInput {
@@ -1165,6 +1193,7 @@ a.tabSelected {
 .historyEntryTags:not(:empty) {
   display: flex;
   margin-top: 12px;
+  column-gap: 8px;
 }
 
 .historyEntryTag {
@@ -1274,6 +1303,10 @@ a.tabSelected {
   padding-left: 32px;
   overflow-x: hidden;
   overflow-y: scroll;
+}
+
+.formSubmitSection {
+  margin-top: 16px;
 }
 
 .formSubmitSection > button {
@@ -1433,6 +1466,10 @@ a.tabSelected {
 
 /* Auxiliar */
 
+.hiinvisiblede {
+  background-color: transparent;
+}
+
 @media only screen and (min-width: 1201px) {
   .hideOnBigScreen {
     display: none;
@@ -1469,6 +1506,29 @@ a.tabSelected {
 
   header {
     justify-content: center;
+  }
+
+  .mobileWindow {
+    display: none;
+  }
+
+  .mobileWindowOpen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    z-index: 10;
+    background-color: white;
+    padding: var(--main-content-padding);
+    padding-top: calc(var(--header-height) + var(--main-content-padding) + 16px);
+  }
+
+  .mobileWindowHeader {
+    font-size: var(--font-size-bg-1);
   }
 
   .infoSection {
@@ -1571,7 +1631,7 @@ a.tabSelected {
     left: 0;
     width: 100%;
     max-width: 100%;
-    height: 55vh;
+    height: auto;
     box-sizing: border-box;
   }
 
@@ -1635,8 +1695,27 @@ a.tabSelected {
     margin-bottom: -3px;
   }
 
+  .editWindowOverlay {
+    z-index: 10;
+  }
+
+  .editWindowCloseBtn {
+    top: calc(var(--header-height) + 16px);
+    right: var(--main-content-padding);
+    padding: 0;
+  }
+
+  .editWindowHeading {
+    margin-top: calc(var(--header-height));
+  }
+
   .editWindow {
-    padding: 32px;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    border-radius: 0;
+    z-index: 5;
+    padding: 32px var(--main-content-padding) 32px var(--main-content-padding);
   }
 
   .editWindowNav {
@@ -1645,7 +1724,7 @@ a.tabSelected {
 
   .editWindowContent {
     width: 100%;
-    padding: 142px 32px 32px 32px;
+    padding: calc(var(--header-height) + 120px) var(--main-content-padding) 32px var(--main-content-padding);
   }
 
   .editWindowContent > .verticalScrollSection {
@@ -1720,11 +1799,12 @@ a.tabSelected {
   .bondsOps {
     flex-direction: row-reverse;
     justify-content: flex-end;
+    column-gap: 8px;
   }
 
   .searchBar {
-    width: 24px;
-    min-width: 0;
+    position: fixed;
+    top: -9999px;
   }
 
   .searchBarInput {

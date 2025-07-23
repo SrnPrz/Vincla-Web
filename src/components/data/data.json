@@ -10,7 +10,9 @@
             },
             "settings" : {
                 "notificationFreq" : "Semanal",
-                "notificationType" : "Cumpleanos",
+                "notificationTypes" : {
+                    "birthday" : true
+                },
                 "silentMode" : true
             }
         }
@@ -100,7 +102,7 @@
                         "date": "2023-10-11",
                         "type": "Compromiso",
                         "title": "Reunión familiar cada sábado",
-                        "description": "Dado que no tendemos a hablar de nuestras cosas, mamá y yo decidimos reunirnos cada sábado para tener una charla sobre la semana. Le preparo la merienda a mamá como forma de mostrarme cariñoso"
+                        "description": "Dado que no tendemos a hablar de nuestras cosas, mamá y yo decidimos reunirnos cada sábado para tener una charla sobre la semana."
                     }
                 ],
                 "limits": [
@@ -192,7 +194,7 @@
             "image": "default.svg",
             "type": "familia",
             "status": "muy buena racha",
-            "last_contact": "3 días",
+            "last_contact": "2025-07-03",
             "closeness": "muy cercano",
             "birthday": "",
             "data": {
@@ -238,7 +240,7 @@
             "image": "default.svg",
             "type": "amistad",
             "status": "en conflicto",
-            "last_contact": "70 días",
+            "last_contact": "2025-07-03",
             "closeness": "distante",
             "birthday": "",
             "data": {
@@ -261,7 +263,7 @@
             "image": "default.svg",
             "type": "familia",
             "status": "frío",
-            "last_contact": "30 días",
+            "last_contact": "2025-07-03",
             "closeness": "neutral",
             "birthday": "",
             "data": {
@@ -284,7 +286,7 @@
             "image": "default.svg",
             "type": "pareja",
             "status": "estable",
-            "last_contact": "1 días",
+            "last_contact": "2025-07-03",
             "closeness": "íntimo",
             "birthday": "",
             "data": {
@@ -307,7 +309,7 @@
             "image": "default.svg",
             "type": "familia",
             "status": "reconectado",
-            "last_contact": "12 días",
+            "last_contact": "2025-07-03",
             "closeness": "cercano",
             "birthday": "",
             "data": {
@@ -330,7 +332,7 @@
             "image": "default.svg",
             "type": "amistad",
             "status": "tensión reciente",
-            "last_contact": "5 días",
+            "last_contact": "2025-07-03",
             "closeness": "muy cercano",
             "birthday": "",
             "data": {
@@ -352,8 +354,8 @@
             "name": "Miguel Herrera",
             "image": "default.svg",
             "type": "conocido",
-            "status": "neutral",
-            "last_contact": "90 días",
+            "status": "estable",
+            "last_contact": "2025-07-03",
             "closeness": "distante",
             "birthday": "",
             "data": {
@@ -376,7 +378,7 @@
             "image": "default.svg",
             "type": "otro",
             "status": "estable",
-            "last_contact": "18 días",
+            "last_contact": "2025-07-03",
             "closeness": "neutral",
             "birthday": "",
             "data": {
@@ -399,7 +401,7 @@
             "image": "default.svg",
             "type": "familia",
             "status": "estable",
-            "last_contact": "22 días",
+            "last_contact": "2025-07-03",
             "closeness": "cercano",
             "birthday": "",
             "data": {
@@ -422,7 +424,7 @@
             "image": "default.svg",
             "type": "trabajo",
             "status": "tensión reciente",
-            "last_contact": "10 días",
+            "last_contact": "2025-07-03",
             "closeness": "neutral",
             "birthday": "",
             "data": {
@@ -445,7 +447,7 @@
             "image": "default.svg",
             "type": "amistad",
             "status": "muy buena racha",
-            "last_contact": "2 días",
+            "last_contact": "2025-07-03",
             "closeness": "muy cercano",
             "birthday": "",
             "data": {
@@ -468,7 +470,7 @@
             "image": "default.svg",
             "type": "familia",
             "status": "frío",
-            "last_contact": "60 días",
+            "last_contact": "2025-07-03",
             "closeness": "distante",
             "birthday": "",
             "data": {
@@ -491,7 +493,7 @@
             "image": "default.svg",
             "type": "pareja",
             "status": "en conflicto",
-            "last_contact": "120 días",
+            "last_contact": "2025-07-03",
             "closeness": "distante",
             "birthday": "",
             "data": {
@@ -514,7 +516,7 @@
             "image": "default.svg",
             "type": "amistad",
             "status": "reconectado",
-            "last_contact": "7 días",
+            "last_contact": "2025-07-03",
             "closeness": "cercano",
             "birthday": "",
             "data": {
@@ -537,7 +539,7 @@
             "image": "default.svg",
             "type": "trabajo",
             "status": "estable",
-            "last_contact": "3 días",
+            "last_contact": "2025-07-03",
             "closeness": "neutral",
             "birthday": "",
             "data": {
@@ -560,7 +562,7 @@
             "image": "default.svg",
             "type": "conocido",
             "status": "frío",
-            "last_contact": "100 días",
+            "last_contact": "2025-07-03",
             "closeness": "distante",
             "birthday": "",
             "data": {
@@ -583,7 +585,7 @@
             "image": "default.svg",
             "type": "familia",
             "status": "muy buena racha",
-            "last_contact": "2 días",
+            "last_contact": "2025-07-03",
             "closeness": "íntimo",
             "birthday": "",
             "data": {
@@ -606,7 +608,7 @@
             "image": "default.svg",
             "type": "otro",
             "status": "estable",
-            "last_contact": "9 días",
+            "last_contact": "2025-07-03",
             "closeness": "neutral",
             "birthday": "",
             "data": {

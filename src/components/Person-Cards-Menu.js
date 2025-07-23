@@ -1,19 +1,123 @@
 import { NavLink } from "react-router-dom";
+import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
-export const PersonCards = ({ bonds, filter }) => {
+export const PersonCards = ({ data, toggleUpdateData, filter }) => {
 
-    const filteredBonds =
-        filter !== "todos"
-            ? bonds.filter((person) => person.type === filter)
-            : bonds;
+    const bonds = data.bonds;
+
+    const navigate = useNavigate();
+
+    const handleNewPerson = () => {
+        var maxID = 0;
+
+        for (var i = 0; i < bonds.length; i++) {
+            if (parseInt(bonds[i].id) > maxID)
+                maxID = parseInt(bonds[i].id);
+        }
+
+        maxID++;
+
+        var newData = {...data};
+
+        newData.bonds.push(
+            {
+            "id": maxID,
+            "name": "",
+            "image": "default.svg",
+            "type": "familia",
+            "status": "estable",
+            "last_contact": "",
+            "closeness": "cercano",
+            "birthday": "",
+            "data": {
+                "birthday": "",
+                "notes": "",
+                "nextMeetingDate": "",
+                "dynamics": [],
+                "limits": [],
+                "conflicts": [],
+                "challenges": {
+                    "active": [],
+                    "suggestions": []
+                },
+                "history": []
+            }
+        });
+
+        toggleUpdateData(newData);
+
+        localStorage.setItem("newBond", true);
+
+        navigate("/vinculos/persona/" + maxID);
+    }
+
+    //localStorage.removeItem("newBond");
+
+    const [searchedName, setSearchedName] = useState("");
+    const [sortedBy, setSortedBy] = useState("cercania-emocional");
+
+    const closenessValue = {
+        "íntimo" : 4,
+        "muy cercano" : 3,
+        "cercano" : 2,
+        "neutral" : 1,
+        "distante" : 0
+    };
+
+    const typeValue = {
+        "familia" : 5,
+        "pareja" : 4,
+        "amistad" : 3,
+        "trabajo" : 2,
+        "conocido" : 1,
+        "otro" : 0
+    };
+
+    const statusValue = {
+        "estable" : 6,
+        "muy buena racha" : 5,
+        "tensión reciente" : 4,
+        "reconectando" : 3,
+        "pendiente de reconexión" : 2,
+        "frío" : 1,
+        "en conflicto" : 0,
+    };
+
+    const filteredBonds = bonds
+        .filter((person) =>
+            filter === "todos" ? true : person.type === filter
+        )
+        .filter((person) =>
+            person.name.toLowerCase().includes(searchedName.toLowerCase())
+        )
+        .sort((a, b) =>
+            sortedBy === "cercania-emocional" ? closenessValue[b.closeness] - closenessValue[a.closeness] :
+            sortedBy === "tipo-vinculo" ? typeValue[b.type] - typeValue[a.type] :
+            statusValue[b.status] - statusValue[a.status]
+        );
+
+    function convertDateFormat(dateString) {
+        const [year, month, day] = dateString.split("-");
+
+        if (day == undefined || month == undefined || year == undefined)
+            return "";
+
+        return `${day}/${month}/${year}`;
+    }
 
     const linkClasses = (btnFilter) =>
     btnFilter == filter ? "tabSelected" : "";
+
+    const searchBarRef = useRef(null);
 
     return (
         <div className="bondsMenu contentWrap">
             <h1>Mis Vínculos</h1>
             <div className="bondsOps">
+                <button className="hideOnDesktop" onClick={handleNewPerson}>
+                    <img src="/img/add-person.svg" width="20px" height="20px"></img>
+                </button>
                 <button className="filterButton hideOnDesktop">
                     <img src="/img/filter_icon.svg"></img>
                 </button>
@@ -21,13 +125,24 @@ export const PersonCards = ({ bonds, filter }) => {
                     <span className="searchBarMagnGlass" style={{
                         backgroundImage: 'url(/img/magnifying-glass.svg)'
                     }}></span>
-                    <input id="searchBar" className="searchBarInput" type="text" placeholder="Buscar vínculo"></input>
+                    <input ref={searchBarRef} onChange={(e) => setSearchedName(e.target.value)}
+                    id="searchBar" className="searchBarInput" type="text" placeholder="Buscar vínculo"></input>
                 </form>
-                <a href="." className="hideOnPhone">+ Añadir vínculo</a>
+                <button onClick={
+                    () => {
+                        // Clicking on the phone search button focuses on the hiden search bar
+                        if (searchBarRef.current)
+                            searchBarRef.current.focus();
+                    }
+                } type="button" className="searchBtn"><img src="/img/magnifying-glass.svg" width="24px" height="24px"></img></button>
+                <button className="hideOnPhone" onClick={handleNewPerson}>+ Añadir vínculo</button>
                 <label className="hideOnPhone" htmlFor="filterBond">Ordenar por:</label>
                 <div className="filterSelect">
-                    <select id="filterBond" className="filterSelectInput">
+                    <select id="filterBond" className="filterSelectInput" defaultValue={sortedBy}
+                    onChange={(e) => setSortedBy(e.target.value)}>
                         <option value="cercania-emocional">Cercanía emocional</option>
+                        <option value="tipo-vinculo">Tipo de vínculo</option>
+                        <option value="estado-relacion">Estado de la relación</option>
                     </select>
                 </div>
             </div>
@@ -46,7 +161,7 @@ export const PersonCards = ({ bonds, filter }) => {
 
             <div className="personCards">
                 {filteredBonds.map((person, index) => (
-                    <NavLink to={`/vinculos/${person.type}/${person.id}`} className="personCard" key={index}>
+                    <NavLink to={`/vinculos/persona/${person.id}`} className="personCard" key={index}>
                         <div className="personPhotoAndName">
                             <img
                                 src={`/img/people/${person.image}`}
@@ -74,7 +189,7 @@ export const PersonCards = ({ bonds, filter }) => {
                         <p className="personStatus">
                             Estado: {person.status.charAt(0).toUpperCase() + person.status.slice(1)}
                             <br />
-                            Último contacto: {person.last_contact}
+                            Último contacto: {convertDateFormat(person.last_contact)}
                         </p>
                     </NavLink>
                 ))}

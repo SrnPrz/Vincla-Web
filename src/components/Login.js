@@ -29,7 +29,7 @@ export const Login = ({data, person }) => {
                     }
                     {
                         userLogginEnabled &&
-                        <form action="/" onSubmit={
+                        <form action="/vinculos" onSubmit={
                             (e) => {
                                 
                                 for (var i = 0; i < users.length; i++) {

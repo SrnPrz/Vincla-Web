@@ -43,7 +43,7 @@ export const HistoryPage = ({ person }) => {
                             src={"/img/history/" + (
                                 history.satisfaction == "Triste" ? "face-sad.svg" :
                                 history.satisfaction == "Decepcionado" ? "face-frown.svg" :
-                                history.satisfaction == "Neutral" ? "face-neutral.svg" :
+                                history.satisfaction == "Neutro" ? "face-neutral.svg" :
                                 history.satisfaction == "Conforme" ? "face-content.svg" :
                                 history.satisfaction == "Contento" ? "face-smile.svg" :
                                 history.satisfaction == "Feliz" ? "face-happy.svg" : ""

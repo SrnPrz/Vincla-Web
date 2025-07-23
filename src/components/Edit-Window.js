@@ -5,19 +5,37 @@ import { LimitsPage } from "./Limits-Page";
 import { ChallengesPage } from "./Challenges-Page";
 import { HistoryPage } from "./History-Page";
 import Slider from '@mui/material/Slider';
-import { useNavigate } from "react-router-dom";
 
-const HistoryEdit = ({ person }) => {
+const HistoryEdit = ({ person, setMobileWindowOpen, newBond }) => {
     const [windowsOpen, setWindowsOpen] = useState(false);
-
     const [satisfactionValue, setSatisfactionValue] = useState(0);
 
     const handleSliderChange = (event, newValue) => {
         setSatisfactionValue(newValue);
     };
 
+    const [addedTags, setAddedTags] = useState([]);
+
+    const handleTags = () => {
+        const newTags = [...addedTags];
+        newTags.push("");
+        setAddedTags(newTags);
+    }
+
+    const updateTag = (newTag, index) => {
+        const newTags = [...addedTags];
+        
+        newTags[index] = newTag.slice(0, 20);
+        setAddedTags(newTags);
+    }
+
+    const [historyDate, setHistoryDate] = useState("");
+    const [activityType, setActivityType] = useState("");
+    const [historyDesc, setHistoryDesc] = useState("");
+
     return (
         <div className="historyPage">
+            <h1 className="hideOnBigScreen">{ newBond ? "Nuevo Vínculo" : "Editar Vínculo"}</h1>
             {
                 !windowsOpen &&
                 <div>
@@ -26,21 +44,49 @@ const HistoryEdit = ({ person }) => {
                         <button onClick={() => setWindowsOpen(true)} className="editPageHeadingBtn" type="button">+ Registrar Interacción</button>
                     </div>
                     <HistoryPage person={person}></HistoryPage>
+                    <div className="formSubmitSection">
+                        <button className="hideOnBigScreen" type="button" onClick={() => setMobileWindowOpen(false)}>Atrás</button>
+                    </div>
                 </div>
             }
             {
                 windowsOpen &&
                 <div>
                     <h2>Registrar Interacción</h2>
-                    <form>
+                    <form onSubmit={(e) => {
+                        e.preventDefault();
+                        for (var i = 0; i < addedTags; i++) {
+                            if (addedTags[i] == "") {
+                                alert("No se permiten etiquetas vacias.");
+                                return;
+                            }
+                        }
+
+                        const newHistory = {
+                            "date" : historyDate,
+                            "activity" : activityType,
+                            "satisfaction" : satisfactionValue == 0 ? "Triste" :
+                                                satisfactionValue == 1 ? "Decepcionado" :
+                                                satisfactionValue == 2 ? "Neutro" :
+                                                satisfactionValue == 3 ? "Conforme" :
+                                                satisfactionValue == 4 ? "Contento" :
+                                                satisfactionValue == 5 ? "Feliz" : "",
+                            "description" : historyDesc,
+                            "tags" : addedTags
+                        };
+
+                        person.data.history.push(newHistory);
+                        setAddedTags([]);
+                        setWindowsOpen(false);
+                    }}>
                         <div className="formSection">
                             <label htmlFor="interactionDate">Fecha</label>
-                            <input type="date" id="interactionDate"></input>
+                            <input type="date" id="interactionDate" onChange={(e) => setHistoryDate(e.target.value)} required></input>
                         </div>
                         <div className="formSection">
                             <label htmlFor="dynamicType">Tipo de actividad</label>
                             <div className="selectWrap">
-                                <select id="dynamicType">
+                                <select id="dynamicType" onChange={(e) => setActivityType(e.target.value)} required>
                                     <option value="Mensaje">Mensaje</option>
                                     <option value="Quedada">Quedada</option>
                                     <option value="Videollamada">Videollamada</option>
@@ -52,7 +98,7 @@ const HistoryEdit = ({ person }) => {
                         </div>
                         <div className="formSection">
                             <label htmlFor="dynamicDesc">Description</label>
-                            <textarea id="dynamicDesc"></textarea>
+                            <textarea id="dynamicDesc" onChange={(e) => setHistoryDesc(e.target.value)} required></textarea>
                         </div>
                         <div className="formSection">
                             <label>Satisfacción</label>
@@ -96,11 +142,21 @@ const HistoryEdit = ({ person }) => {
                         <div className="formSection">
                             <label>Etiquetas</label>
                             <div className="formTagsInput">
-                                <button className="addTagBtn">+</button>
+                                {
+                                    addedTags.map((tag, index) => (
+                                        <input id={"tag" + index} value={tag} className="tagInput" type="text"
+                                        onChange={(e) => updateTag(e.target.value, index)}></input>
+                                    ))
+                                }
+                                {
+                                    addedTags.length !== 3 && 
+                                    <button onClick={handleTags} type="button" className="addTagBtn">+</button>
+                                }
+                                
                             </div>
                         </div>
                         <div className="formSubmitSection">
-                            <button type="button">Guardar</button>
+                            <button type="submit">Guardar</button>
                             <button type="button" onClick={() => setWindowsOpen(false)}>Descartar</button>
                         </div>
                     </form>
@@ -110,7 +166,7 @@ const HistoryEdit = ({ person }) => {
     )
 }
 
-const ChallengesEdit = ({ person }) => {
+const ChallengesEdit = ({ person, setMobileWindowOpen, newBond }) => {
     const [windowsOpen, setWindowsOpen] = useState(false);
 
     const [challengeName, setChallengeName] = useState("");
@@ -119,13 +175,16 @@ const ChallengesEdit = ({ person }) => {
 
     return (
         <div className="conflictPage">
-
+            <h1 className="hideOnBigScreen">{ newBond ? "Nuevo Vínculo" : "Editar Vínculo"}</h1>
             {
                 !windowsOpen &&
                 <div>
                     <div className="editPageHeading"><h2>Desafíos</h2><button onClick={() => setWindowsOpen(true)} className="editPageHeadingBtn" type="button">+ Crear desafío personalizado</button></div>
                     <p className="editWindowDesc">Desafíos que te ayudarán a mejorar el vínculo</p>
                     <ChallengesPage person={person}></ChallengesPage>
+                    <div className="formSubmitSection">
+                        <button className="hideOnBigScreen" type="button" onClick={() => setMobileWindowOpen(false)}>Atrás</button>
+                    </div>
                 </div>
             }
             {
@@ -168,7 +227,7 @@ const ChallengesEdit = ({ person }) => {
     )
 }
 
-const ConflictEdit = ({ person }) => {
+const ConflictEdit = ({ person, setMobileWindowOpen, newBond }) => {
     const [windowsOpen, setWindowsOpen] = useState(false);
 
     const toggleWindowsOpen = () => {
@@ -183,6 +242,7 @@ const ConflictEdit = ({ person }) => {
 
     return (
         <div className="conflictPage">
+            <h1 className="hideOnBigScreen">{ newBond ? "Nuevo Vínculo" : "Editar Vínculo"}</h1>
             {
                 !windowsOpen &&
                 <div>
@@ -190,6 +250,9 @@ const ConflictEdit = ({ person }) => {
                         <h2>Conflictos</h2><button onClick={toggleWindowsOpen} className="editPageHeadingBtn" type="button">+ Añadir Conflicto</button>
                     </div>
                     <ConflictPage person={person}></ConflictPage>
+                    <div className="formSubmitSection">
+                        <button className="hideOnBigScreen" type="button" onClick={() => setMobileWindowOpen(false)}>Atrás</button>
+                    </div>
                 </div>
 
             }
@@ -248,7 +311,7 @@ const ConflictEdit = ({ person }) => {
     )
 }
 
-const LimitsEdit = ({ person }) => {
+const LimitsEdit = ({ person, setMobileWindowOpen, newBond }) => {
     const [windowsOpen, setWindowsOpen] = useState(false);
 
     const toggleWindowsOpen = () => {
@@ -261,6 +324,7 @@ const LimitsEdit = ({ person }) => {
         const updatedLimits = limits.map((limit, i) =>
             i === index ? { ...limit, enabled: !limit.enabled } : limit
         );
+        person.data.limits = updatedLimits;
         setLimits(updatedLimits);
     };
 
@@ -270,6 +334,7 @@ const LimitsEdit = ({ person }) => {
 
     return (
         <div className="limitsPage">
+            <h1 className="hideOnBigScreen">{ newBond ? "Nuevo Vínculo" : "Editar Vínculo"}</h1>
             {
                 !windowsOpen &&
                 <div>
@@ -280,6 +345,7 @@ const LimitsEdit = ({ person }) => {
                     </div>
                     <div className="formSubmitSection">
                         <button onClick={toggleWindowsOpen} type="button">Editar Límites</button>
+                        <button className="hideOnBigScreen" type="button" onClick={() => setMobileWindowOpen(false)}>Atrás</button>
                     </div>
                 </div>
             }
@@ -338,7 +404,7 @@ const LimitsEdit = ({ person }) => {
     )
 }
 
-const DynamicsEdit = ({ person }) => {
+const DynamicsEdit = ({ person, setMobileWindowOpen, newBond }) => {
     const [windowsOpen, setWindowsOpen] = useState(false);
 
     const toggleWindowsOpen = () => {
@@ -352,6 +418,7 @@ const DynamicsEdit = ({ person }) => {
 
     return (
         <div className="dynamicsPage">
+            <h1 className="hideOnBigScreen">{ newBond ? "Nuevo Vínculo" : "Editar Vínculo"}</h1>
             {
                 !windowsOpen &&
                 <div>
@@ -360,6 +427,9 @@ const DynamicsEdit = ({ person }) => {
                         <button onClick={toggleWindowsOpen} className="editPageHeadingBtn" type="button">+ Añadir nueva dinámica</button>
                     </div>
                     <DynamicsPage person={person}></DynamicsPage>
+                    <div className="formSubmitSection">
+                        <button className="hideOnBigScreen" type="button" onClick={() => setMobileWindowOpen(false)}>Atrás</button>
+                    </div>
                 </div>
             }
             {
@@ -415,9 +485,10 @@ const DynamicsEdit = ({ person }) => {
     )
 }
 
-const FileEdit = ({ person }) => {
+const FileEdit = ({ person, setMobileWindowOpen, newBond }) => {
     return (
         <div className="fileEditPage">
+            <h1 className="hideOnBigScreen">{ newBond ? "Nuevo Vínculo" : "Editar Vínculo"}</h1>
             <div className="editPageHeading">
                 <h2>Ficha</h2>
             </div>
@@ -466,19 +537,25 @@ const FileEdit = ({ person }) => {
                 </div>
                 <div className="formSection">
                     <label htmlFor="bwBirthday">Cumpleaños</label>
-                    <input type="date" id="bwBirthday" defaultValue={person.birthday}></input>
+                    <input onChange={(e) => {person.birthday = e.target.value}}
+                    type="date" id="bwBirthday" defaultValue={person.birthday}></input>
+                </div>
+                <div className="formSubmitSection">
+                    <button className="hideOnBigScreen" type="button" onClick={() => setMobileWindowOpen(false)}>Atrás</button>
                 </div>
             </form>
         </div>
     )
 }
 
-export const EditWindow = ({ person, toggleEditWindowVisible }) => {
+export const EditWindow = ({ person, toggleEditWindowVisible, newBond }) => {
     const [selectedTab, setSelectedTab] = useState("ficha");
 
     const changeSelectedTab = (newTab) => {
         setSelectedTab(newTab);
     };
+
+    const [mobileWindowOpen, setMobileWindowOpen] = useState(false);
 
     return (
         <div className="editWindowOverlay">
@@ -486,7 +563,7 @@ export const EditWindow = ({ person, toggleEditWindowVisible }) => {
                 <button onClick={toggleEditWindowVisible} className="editWindowCloseBtn" type="button">
                     <img width="20px" height="20px" src="/img/close.svg"></img>
                 </button>
-                <h1>Editar Vínculo</h1>
+                <h1 className="editWindowHeading hide">{ newBond ? "Nuevo Vínculo" : "Editar Vínculo"}</h1>
                 <div className="editWindowBody">
                     <nav className="editWindowNav">
                         <ul>
@@ -508,28 +585,48 @@ export const EditWindow = ({ person, toggleEditWindowVisible }) => {
                         <div className="verticalScrollSection">
                             <div className="personDataAccordion">
                                 <div className="personDataAccordionElem">
-                                    <button type="button" onClick={() => setSelectedTab("ficha")} className={"personDataAccordionBtn" + (selectedTab == "dinamicas" ? " active" : "")}>Ficha</button>
-                                    {(selectedTab == "ficha") && <FileEdit person={person}></FileEdit>}
+                                    <button type="button"
+                                    onClick={() => {setMobileWindowOpen(true); changeSelectedTab("ficha");}}
+                                    className="personDataAccordionBtn">Ficha</button>
                                 </div>
                                 <div className="personDataAccordionElem">
-                                    <button type="button" onClick={() => setSelectedTab("dinamicas")} className={"personDataAccordionBtn" + (selectedTab == "dinamicas" ? " active" : "")}>Dinámicas</button>
-                                    {(selectedTab == "dinamicas") && <DynamicsEdit person={person}></DynamicsEdit>}
+                                    <button type="button"
+                                    onClick={() => {setMobileWindowOpen(true); changeSelectedTab("dinamicas"); }}
+                                    className="personDataAccordionBtn">Dinámicas</button>
                                 </div>
                                 <div className="personDataAccordionElem">
-                                    <button type="button" onClick={() => setSelectedTab("limites")} className={"personDataAccordionBtn" + (selectedTab == "limites" ? " active" : "")}>Límites</button>
-                                    {(selectedTab == "limites") && <LimitsEdit person={person}></LimitsEdit>}
+                                    <button type="button" 
+                                    onClick={() => {setMobileWindowOpen(true); changeSelectedTab("limites");}}
+                                    className="personDataAccordionBtn">Límites</button>
                                 </div>
                                 <div className="personDataAccordionElem">
-                                    <button type="button" onClick={() => setSelectedTab("conflictos")} className={"personDataAccordionBtn" + (selectedTab == "conflictos" ? " active" : "")}>Conflictos</button>
-                                    {(selectedTab == "conflictos") && <ConflictEdit person={person}></ConflictEdit>}
+                                    <button type="button" 
+                                    onClick={() => {setMobileWindowOpen(true); changeSelectedTab("conflictos");}}
+                                    className="personDataAccordionBtn">Conflictos</button>
                                 </div>
                                 <div className="personDataAccordionElem">
-                                    <button type="button" onClick={() => setSelectedTab("desafios")} className={"personDataAccordionBtn" + (selectedTab == "desafios" ? " active" : "")}>Desafíos</button>
-                                    {(selectedTab == "desafios") && <ChallengesEdit person={person}></ChallengesEdit>}
+                                    <button type="button"
+                                    onClick={() => {setMobileWindowOpen(true); changeSelectedTab("desafios");}}
+                                    className="personDataAccordionBtn">Desafíos</button>
                                 </div>
                                 <div className="personDataAccordionElem">
-                                    <button type="button" onClick={() => setSelectedTab("historial")} className={"personDataAccordionBtn" + (selectedTab == "historial" ? " active" : "")}>Historial</button>
-                                    {(selectedTab == "historial") && <HistoryEdit person={person}></HistoryEdit>}
+                                    <button type="button"
+                                    onClick={() => {setMobileWindowOpen(true); changeSelectedTab("historial");}}
+                                    className="personDataAccordionBtn">Historial</button>
+                                </div>
+                                <div className={"mobileWindow" + (mobileWindowOpen != "" ? " mobileWindowOpen" : "")}>
+                                    {(selectedTab == "ficha") && <FileEdit setMobileWindowOpen={setMobileWindowOpen} 
+                                    person={person} newBond={newBond}></FileEdit>}
+                                    {(selectedTab == "dinamicas") && <DynamicsEdit setMobileWindowOpen={setMobileWindowOpen} 
+                                    person={person} newBond={newBond}></DynamicsEdit>}
+                                    {(selectedTab == "limites") && <LimitsEdit setMobileWindowOpen={setMobileWindowOpen} 
+                                    person={person} newBond={newBond}></LimitsEdit>}
+                                    {(selectedTab == "conflictos") && <ConflictEdit setMobileWindowOpen={setMobileWindowOpen} 
+                                    person={person} newBond={newBond}></ConflictEdit>}
+                                    {(selectedTab == "desafios") && <ChallengesEdit setMobileWindowOpen={setMobileWindowOpen} 
+                                    person={person} newBond={newBond}></ChallengesEdit>}
+                                    {(selectedTab == "historial") && <HistoryEdit setMobileWindowOpen={setMobileWindowOpen} 
+                                    person={person} newBond={newBond}></HistoryEdit>}
                                 </div>
                             </div>
                         </div>

@@ -13,13 +13,13 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="login" element={<Header isLogged={false} setMenuVisible={ () => setMenuVisible(prev => !prev) }></Header>}></Route>
+          <Route path="/" element={<Header isLogged={false} setMenuVisible={ () => setMenuVisible(prev => !prev) }></Header>}></Route>
           <Route path="/*" element={ <Header isLogged={true} setMenuVisible={ () => setMenuVisible(prev => !prev) }></Header> }></Route>
         </Routes>
       </BrowserRouter>
       <BrowserRouter>
         <Routes>
-          <Route path="login" element={<Login data={data}></Login>}></Route>
+          <Route path="/" element={<Login data={data}></Login>}></Route>
           <Route path="/*" element={ <MainContent data={data} menuVisible={menuVisible}></MainContent> }></Route>
         </Routes>
       </BrowserRouter>

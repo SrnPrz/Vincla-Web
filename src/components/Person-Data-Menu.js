@@ -14,19 +14,22 @@ export const PersonDataMenu = ({ bonds, index }) => {
     const person = bonds[index];
 
     const [sideMenuVisible, setSideMenuVisible] = useState(false);
-    
+
     const toggleSideMenuVisible = () => {
         setSideMenuVisible(prev => !prev);
     };
 
     const [selectedTab, setSelectedTab] = useState("dinamicas");
-
-    const changeSelectedTab = (newTab) => {
-        setSelectedTab(newTab);
-    };
-
+    const [mobileWindowTab, setMobileWindowTab] = useState("");
     const [editWindowVisible, setEditWindoVisible] = useState(false);
-    
+    const [newBondValue, setNewBondValue] = useState(false);
+
+    if (localStorage.getItem("newBond")) {
+        localStorage.removeItem("newBond");
+        setEditWindoVisible(true);
+        setNewBondValue(true);
+    }
+
     const toggleEditWindowVisible = () => {
         setEditWindoVisible(prev => !prev);
     };
@@ -52,7 +55,7 @@ export const PersonDataMenu = ({ bonds, index }) => {
     /* Check how many days since last contact */
 
     function daysAgo(dateString) {
-        if (dateString == "") return " ";
+        if (dateString === "") return " ";
 
         const inputDate = new Date(dateString);
         const today = new Date();
@@ -73,7 +76,7 @@ export const PersonDataMenu = ({ bonds, index }) => {
 
     return (
         <div className="personDataMenu">
-            { editWindowVisible && <EditWindow person={person} toggleEditWindowVisible={toggleEditWindowVisible}></EditWindow> }
+            {editWindowVisible && <EditWindow person={person} newPerson="" toggleEditWindowVisible={toggleEditWindowVisible} newBond={newBondValue}></EditWindow>}
             <div className="personDataSide contentWrap">
                 <div className='personDataTop infoSection'>
                     <div className="personPhotoAndName">
@@ -90,8 +93,8 @@ export const PersonDataMenu = ({ bonds, index }) => {
                                     <span className="bondTag bondTagIntimate">íntimo</span>
                                 ) : person.closeness === "muy cercano" ? (
                                     <span className="bondTag bondTagVeryClose">muy cercano</span>
-                                    ) : person.closeness === "cercano" ? (
-                                        <span className="bondTag bondTagClose">cercano</span>
+                                ) : person.closeness === "cercano" ? (
+                                    <span className="bondTag bondTagClose">cercano</span>
                                 ) : person.closeness === "neutral" ? (
                                     <span className="bondTag bondTagNeutral">neutral</span>
                                 ) : (
@@ -104,23 +107,25 @@ export const PersonDataMenu = ({ bonds, index }) => {
 
                 <div className="infoSection">
                     <div className="dataName">Estado: </div>
-                    <span className="dataValue">{ person.status }</span>
+                    <span className="dataValue">{person.status}</span>
                 </div>
                 <div className="infoSection">
                     <div className="dataName">Último contacto: </div>
-                    <span className="dataValue">{ daysAgo(person.last_contact) }</span>
+                    <span className="dataValue">{daysAgo(person.last_contact)}</span>
                 </div>
                 <div className="infoSection">
                     <div className="dataName">Cumpleaños: </div>
-                    <span className="dataValue">{ formatBirthday(person.birthday) }</span>
+                    <span className="dataValue">{formatBirthday(person.birthday)}</span>
                 </div>
                 <div className="infoSection">
                     <div className="dataName">Notas: </div>
-                    <textarea id="personNotes" className="dataValue" defaultValue={ person.data.notes }></textarea>
+                    <textarea id="personNotes" className="dataValue"
+                    onChange={(e) => person.data.notes = e.target.value}>{person.data.notes}</textarea>
                 </div>
                 <div className="infoSection">
                     <div className="dataName">Próxima reunión: </div>
-                    <input id="personNextMeetingDate" className="dataValue" defaultValue={person.data.nextMeetingDate} type="date"></input>
+                    <input onChange={(e) => person.data.nextMeetingDate = e.target.value}
+                    id="personNextMeetingDate" className="dataValue" defaultValue={person.data.nextMeetingDate} type="date"></input>
                 </div>
                 <nav className="personDataBottomBtns">
                     <ul>
@@ -130,46 +135,61 @@ export const PersonDataMenu = ({ bonds, index }) => {
                         <li>
                             <button type="button" onClick={() => {
                                 if (window.confirm("¿Estas seguro?")) {
-                                    bonds.splice(index,1);
+                                    bonds.splice(index, 1);
                                     navigate("/vinculos");
-                                }}
+                                }
+                            }
                             }>Eliminar vínculo</button>
                         </li>
                     </ul>
                 </nav>
             </div>
-            <div className={"personTabsSide contentWrap" + (sideMenuVisible ? "" : " personTabsSideHidden") }>
+            <div className={"personTabsSide contentWrap" + (sideMenuVisible ? "" : " personTabsSideHidden")}>
                 <button type="button" className={"expandBtn" + (sideMenuVisible ? " expandBtnOpen" : "")} onClick={toggleSideMenuVisible}></button>
                 <nav className="personTabs">
                     <ul>
-                        <li><button type="button" onClick={() => setSelectedTab("dinamicas")} className={selectedTab == "dinamicas" ? "active" : ""}>Dinámicas</button></li>
-                        <li><button type="button" onClick={() => setSelectedTab("limites")} className={selectedTab == "limites" ? "active" : ""}>Límites</button></li>
-                        <li><button type="button" onClick={() => setSelectedTab("conflictos")} className={selectedTab == "conflictos" ? "active" : ""}>Conflictos</button></li>
-                        <li><button type="button" onClick={() => setSelectedTab("desafios")} className={selectedTab == "desafios" ? "active" : ""}>Desafíos</button></li>
-                        <li><button type="button" onClick={() => setSelectedTab("historial")} className={selectedTab == "historial" ? "active" : ""}>Historial</button></li>
+                        <li><button type="button" onClick={() => setSelectedTab("dinamicas")} className={selectedTab === "dinamicas" ? "active" : ""}>Dinámicas</button></li>
+                        <li><button type="button" onClick={() => setSelectedTab("limites")} className={selectedTab === "limites" ? "active" : ""}>Límites</button></li>
+                        <li><button type="button" onClick={() => setSelectedTab("conflictos")} className={selectedTab === "conflictos" ? "active" : ""}>Conflictos</button></li>
+                        <li><button type="button" onClick={() => setSelectedTab("desafios")} className={selectedTab === "desafios" ? "active" : ""}>Desafíos</button></li>
+                        <li><button type="button" onClick={() => setSelectedTab("historial")} className={selectedTab === "historial" ? "active" : ""}>Historial</button></li>
                     </ul>
                 </nav>
-                
+
                 <div className="personDataAccordion">
                     <div className="personDataAccordionElem">
-                        <button type="button" onClick={() => setSelectedTab("dinamicas")} className={"personDataAccordionBtn" + (selectedTab == "dinamicas" ? " active" : "")}>Dinámicas</button>
-                        {(selectedTab == "dinamicas") && <DynamicsPage person={person} />} 
+                        <button type="button" 
+                        onClick={() => {setMobileWindowTab("Dinámicas"); setSelectedTab("dinamicas");}} 
+                        className="personDataAccordionBtn">Dinámicas</button>
                     </div>
                     <div className="personDataAccordionElem">
-                        <button type="button" onClick={() => setSelectedTab("limites")} className={"personDataAccordionBtn" + (selectedTab == "limites" ? " active" : "")}>Límites</button>
-                        {(selectedTab == "limites") && <LimitsPage person={person} />}
+                        <button type="button" 
+                        onClick={() => {setMobileWindowTab("Límites"); setSelectedTab("limites");}} className="personDataAccordionBtn">Límites</button>
                     </div>
                     <div className="personDataAccordionElem">
-                        <button type="button" onClick={() => setSelectedTab("conflictos")} className={"personDataAccordionBtn" + (selectedTab == "conflictos" ? " active" : "")}>Conflictos</button>
-                        {(selectedTab == "conflictos") && <ConflictPage person={person} />}
+                        <button type="button" 
+                        onClick={() => {setMobileWindowTab("Conflictos"); setSelectedTab("conflictos");}} className="personDataAccordionBtn">Conflictos</button>
                     </div>
                     <div className="personDataAccordionElem">
-                        <button type="button" onClick={() => setSelectedTab("desafios")} className={"personDataAccordionBtn" + (selectedTab == "desafios" ? " active" : "")}>Desafíos</button>
-                        {(selectedTab == "desafios") && <ChallengesPage person={person} />}
+                        <button type="button"
+                        onClick={() => {setMobileWindowTab("Desafios"); setSelectedTab("desafios");}} className="personDataAccordionBtn">Desafíos</button>
                     </div>
                     <div className="personDataAccordionElem">
-                        <button type="button" onClick={() => setSelectedTab("historial")} className={"personDataAccordionBtn" + (selectedTab == "historial" ? " active" : "")}>Historial</button>
-                        {(selectedTab == "historial") && <HistoryPage person={person} />}
+                        <button type="button"
+                        onClick={() => {setMobileWindowTab("Historial"); setSelectedTab("historial")}} className="personDataAccordionBtn">Historial</button>
+                    </div>
+                    <div className={"mobileWindow" + (mobileWindowTab != "" ? " mobileWindowOpen" : "")}>
+                        <h2 className="mobileWindowHeader">{mobileWindowTab}</h2>
+                        <div>
+                            {(selectedTab === "dinamicas") && <DynamicsPage person={person} />}
+                            {(selectedTab === "limites") && <LimitsPage person={person} />}
+                            {(selectedTab === "conflictos") && <ConflictPage person={person} />}
+                            {(selectedTab === "desafios") && <ChallengesPage person={person} />}
+                            {(selectedTab === "historial") && <HistoryPage person={person} />}
+                        </div>
+                        <div className="formSubmitSection hideOnBigScreen">
+                            <button type="button" onClick={() => setMobileWindowTab("")}>Volver</button>
+                        </div>
                     </div>
                 </div>
             </div>
